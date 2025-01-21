@@ -22,7 +22,7 @@ io.on("connection", (socket) => {
     const userInfo = {
       userId: socket.id,
       username: username,
-      connected: new Date().toISOString(),
+      date: new Date().toISOString(),
     };
     users[socket.id] = userInfo;
     console.log(`User ${username} connected with details:`, userInfo);
@@ -41,10 +41,12 @@ io.on("connection", (socket) => {
       io.to(socket.id).emit("paired", {
         partnerId: availableUserId,
         partnerUsername: users[availableUserId].username,
+        date: new Date().toISOString(),
       });
       io.to(availableUserId).emit("paired", {
         partnerId: socket.id,
         partnerUsername: username,
+        date: new Date().toISOString(),
       });
 
       console.log(
@@ -64,7 +66,7 @@ io.on("connection", (socket) => {
       text: data,
       senderId: socket.id,
       sender: users[socket.id].username,
-      datetime: new Date().toISOString(),
+      date: new Date().toISOString(),
     };
     io.to(socket.id).emit("message", messageWithSender);
     if (partnerId) {
@@ -88,6 +90,7 @@ io.on("connection", (socket) => {
       io.to(partnerId).emit("partnerDisconnected", {
         partnerId: socket.id,
         partnerUsername: userInfo?.username,
+        date: new Date().toISOString(),
       });
       delete pairs[partnerId]; // Free the partner
     }

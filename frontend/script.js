@@ -1,4 +1,5 @@
-const socket = io("https://webrtc-0lsv.onrender.com"); // io("http://localhost:3000");
+// const socket = io("https://webrtc-0lsv.onrender.com");
+const socket = io("http://localhost:3000");
 const statusTxt = document.getElementById("status");
 const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
@@ -110,7 +111,7 @@ function displayMessage(message) {
   const isCurrentUser = message.senderId === currentUserId;
   const messageElement = document.createElement("div");
   // Create message text with timestamp
-  const timestamp = new Date(message.datetime).toLocaleTimeString(); // Format the timestamp
+  const timestamp = new Date(message.date).toLocaleTimeString(); // Format the timestamp
   messageElement.innerHTML = `<strong>${message.sender}:</strong> ${message.text} <span class="timestamp">(${timestamp})</span>`;
 
   messageElement.classList.add("message"); // Add a general message class
