@@ -39,13 +39,13 @@ io.on("connection", (socket) => {
 
       // Notify both users
       io.to(socket.id).emit("paired", {
-        partnerId: availableUserId,
-        partnerUsername: users[availableUserId].username,
+        userId: availableUserId,
+        username: users[availableUserId].username,
         date: new Date().toISOString(),
       });
       io.to(availableUserId).emit("paired", {
-        partnerId: socket.id,
-        partnerUsername: username,
+        userId: socket.id,
+        username: username,
         date: new Date().toISOString(),
       });
 

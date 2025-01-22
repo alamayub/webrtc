@@ -99,7 +99,7 @@ socket.on("paired", (data) => {
   pairedUser = data.partnerId;
   console.log("Paired with user ", data);
   textInput.disabled = false;
-  statusTxt.innerText = `Connected with ${data.partnerUsername}`;
+  statusTxt.innerText = `Connected with ${data.username}`;
 });
 
 socket.on("disconnect", () => {
